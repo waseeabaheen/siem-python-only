@@ -1,0 +1,30 @@
+
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIEM Report</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;margin:24px}
+.card{border:1px solid #ddd;border-radius:12px;padding:16px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+h1{font-size:20px;margin:0 0 8px} h2{font-size:16px;margin:0 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef;font-size:12px}
+table{width:100%;border-collapse:collapse} th,td{text-align:left;padding:8px;border-bottom:1px solid #eee;font-size:14px}
+.sev-High{color:#b91c1c;font-weight:600}.sev-Medium{color:#b45309;font-weight:600}
+footer{color:#666;font-size:12px;margin-top:16px}
+</style></head>
+<body>
+<div class="card"><h1>Python-Only SIEM Report</h1><div>Generated: <span class="pill">{{ generated_at }}</span></div></div>
+<div class="card"><h2>Ingest Stats (last 5 minutes)</h2>
+  <div class="grid">
+    <div><strong>Auth events</strong><div>{{ stats.auth_5m }}</div></div>
+    <div><strong>Web events</strong><div>{{ stats.web_5m }}</div></div>
+    <div><strong>Net events</strong><div>{{ stats.net_5m }}</div></div>
+  </div></div>
+<div class="card"><h2>Alerts</h2>
+{% if alerts %}
+<table><thead><tr><th>Rule</th><th>Severity</th><th>Summary</th></tr></thead><tbody>
+{% for a in alerts %}<tr><td>{{ a.rule }}</td><td class="sev-{{ a.severity }}">{{ a.severity }}</td><td>{{ a.summary }}</td></tr>{% endfor %}
+</tbody></table>
+{% else %}<div>No alerts fired. Generate more data and re-run detections.</div>{% endif %}</div>
+<footer>MIT Licensed. Extend in <code>scripts/</code>.</footer>
+</body></html>
