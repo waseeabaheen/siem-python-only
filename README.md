@@ -3,8 +3,7 @@
 No Docker needed. Generates logs, normalizes into SQLite, runs detections, outputs HTML report.
 
 ## Contact
-Author: Waseea Baheen
-[Waseea Baheen](mailto:waseea.baheen@gmail.com)
+Author: [Waseea Baheen](mailto:waseea.baheen@gmail.com)
 
 ## Quickstart (PowerShell)
 ```powershell
